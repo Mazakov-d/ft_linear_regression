@@ -11,7 +11,7 @@ def checkExtension(filename, extensions):
 		exit(1)
 	i_dot = filename.find(".")
 	file_extension = filename[i_dot::]
-	if not file_extension in extensions:
+	if file_extension not in extensions:
 		print(f"This extension '{file_extension}' is not allowed.")
 		exit(1)
 
