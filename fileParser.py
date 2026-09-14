@@ -10,7 +10,7 @@ class fileParser:
 			exit(1)
 		i_dot = self.__filename.find(".")
 		file_extension = self.__filename[i_dot::]
-		if not file_extension in extensions:
+		if file_extension not in extensions:
 			print(f"This extension '{file_extension}' is not allowed.")
 			exit(1)
 
