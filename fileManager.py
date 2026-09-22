@@ -1,6 +1,6 @@
 import sys
 
-class fileParser:
+class fileManager:
 
     def checkExtension(self, extensions):
         if not isinstance(self.__filename, str):
@@ -20,19 +20,29 @@ class fileParser:
 
         print(f"Trying to open '{self.__filename}'.")
         try:
-            self.__file = open(self.__filename)
+            self.__file = open(self.__filename, "r+")
         except IOError:
             if (not ifNotExistCreateIt) :
                 print(f"Can't open the file '{self.__filename}'.", file=sys.stderr)
                 exit(1)
             try :
-                self.__file = open(filename, "x")
+                self.__file = open(filename, "a+")
             except IOError:
                 print(f"Can't create the file '{filename}'.", file=sys.stderr)
                 exit(1)
         print(f"The file '{self.__filename}' is well opened.")
 
+    def __del__(self):
+        if self.__file:
+            self.__file.close()
+
+    def writeTetaOnFile(self, teta: str):
+        self.__file.seek(0)
+        self.__file.write(teta)
+        self.__file.truncate()
+
     def readTetaFile(self) -> float:
+        self.__file.seek(0)
         tetaStr = self.__file.readline()
         if not tetaStr:
             return 0
@@ -58,7 +68,7 @@ class fileParser:
             print("First line is wrong: should contain price and mileage.", file=sys.stderr)
             exit(1)
 
-        self.__prices 
+        self.__prices = {}
         for line in self.__file:
             tokens = line[:-1].split(",")
             try:
