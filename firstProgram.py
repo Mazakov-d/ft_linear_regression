@@ -1,10 +1,10 @@
 import sys
-from fileParser import fileParser
+from fileManager import fileManager
 
 
 def main() -> int:
-    fp0 = fileParser("θ0.txt",".txt", True)
-    fp1 = fileParser("θ1.txt",".txt", True)
+    fp0 = fileManager("θ0.txt", [".txt"], True)
+    fp1 = fileManager("θ1.txt", [".txt"], True)
     mileage = -1
     while 1:
         teta0 = fp0.readTetaFile()
